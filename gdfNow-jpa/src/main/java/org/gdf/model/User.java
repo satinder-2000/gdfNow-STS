@@ -1,6 +1,7 @@
 package org.gdf.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="USER")
@@ -32,8 +36,23 @@ public class User {
 	@Column(name="DOB")
 	private LocalDate dob;
 	
+	@Column(name = "PROFILE_FILE")
+    private String profileFile;
+    
+    @Column(name = "IMAGE")
+    private byte[] image;
+    
+    @Column(name = "CREATED_ON")
+    private LocalDateTime createdOn;
+    
+    @Column(name = "UPDATED_ON")
+    private LocalDateTime updatedOn;
+	
 	@OneToOne(targetEntity = UserAddress.class, cascade = CascadeType.ALL)
 	private UserAddress userAddress;
+	
+	@Transient
+	private MultipartFile uploadedFile;
 
 	public int getId() {
 		return id;
@@ -74,6 +93,40 @@ public class User {
 	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
+	
+	
+
+	public String getProfileFile() {
+		return profileFile;
+	}
+
+	public void setProfileFile(String profileFile) {
+		this.profileFile = profileFile;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	public LocalDateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
+	}
 
 	public UserAddress getUserAddress() {
 		return userAddress;
@@ -81,6 +134,14 @@ public class User {
 
 	public void setUserAddress(UserAddress userAddress) {
 		this.userAddress = userAddress;
+	}
+
+	public MultipartFile getUploadedFile() {
+		return uploadedFile;
+	}
+
+	public void setUploadedFile(MultipartFile uploadedFile) {
+		this.uploadedFile = uploadedFile;
 	}
 	
 	
