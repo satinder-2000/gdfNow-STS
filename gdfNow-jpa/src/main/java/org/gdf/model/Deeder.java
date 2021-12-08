@@ -9,19 +9,16 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
-public class User implements Serializable {
+@Table(name="DEEDER")
+public class Deeder implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -30,14 +27,17 @@ public class User implements Serializable {
 	@Column(name="ID")
 	private int id;
 	
-	@Column(name="FIRST_NAME")
+	@Column(name="FIRSTNAME")
 	private String firstName;
 	
-	@Column(name="LAST_NAME")
+	@Column(name="LASTNAME")
 	private String lastName;
 	
 	@Column(name="EMAIL")
 	private String email;
+	
+	@Column(name="GENDER")
+	private String gender;
 	
 	@Column(name="DOB")
 	private LocalDate dob;
@@ -47,6 +47,9 @@ public class User implements Serializable {
 	
 	@Column(name="MOBILE")
 	private String mobile;
+	
+	@Column(name="ABOUT")
+	private String about;
 	
 	@Column(name = "PROFILE_FILE")
     private String profileFile;
@@ -60,13 +63,18 @@ public class User implements Serializable {
     @Column(name = "UPDATED_ON")
     private LocalDateTime updatedOn;
 	
-	@OneToOne(targetEntity = UserAddress.class, cascade = CascadeType.ALL)
-	private UserAddress userAddress;
+	@OneToOne(targetEntity = DeederAddress.class, cascade = CascadeType.ALL)
+	private DeederAddress deederAddress;
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinTable(name = "DEEDER_NOMINATION", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "DEEDER_ID"))
-    private Set<Deeder> deeders = new HashSet<Deeder>();
+	@Column(name = "CONFIRMED")
+	private boolean confirmed;
 	
+	@Column(name = "NOMINATED")
+	private boolean nominated;
+	
+	@ManyToMany(mappedBy = "deeders")
+    private Set<User> users = new HashSet<User>();
+
 	public int getId() {
 		return id;
 	}
@@ -98,15 +106,23 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	public LocalDate getDob() {
 		return dob;
 	}
-
-	public void setDob(LocalDate dob) {
-		this.dob = dob;
-	}
 	
+	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -121,6 +137,20 @@ public class User implements Serializable {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+	
+	
+
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
 	}
 
 	public String getProfileFile() {
@@ -155,22 +185,39 @@ public class User implements Serializable {
 		this.updatedOn = updatedOn;
 	}
 
-	public UserAddress getUserAddress() {
-		return userAddress;
+	public DeederAddress getDeederAddress() {
+		return deederAddress;
 	}
 
-	public void setUserAddress(UserAddress userAddress) {
-		this.userAddress = userAddress;
+	public void setDeederAddress(DeederAddress deederAddress) {
+		this.deederAddress = deederAddress;
 	}
 
-	public Set<Deeder> getDeeders() {
-		return deeders;
+	public boolean isConfirmed() {
+		return confirmed;
 	}
 
-	public void setDeeders(Set<Deeder> deeders) {
-		this.deeders = deeders;
+	public void setConfirmed(boolean confirmed) {
+		this.confirmed = confirmed;
+	}
+
+	public boolean isNominated() {
+		return nominated;
+	}
+
+	public void setNominated(boolean nominated) {
+		this.nominated = nominated;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 	
 	
+
 
 }

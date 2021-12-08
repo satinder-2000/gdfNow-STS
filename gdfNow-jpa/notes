@@ -1,0 +1,23 @@
+
+
+@GetMapping("")
+public String viewHomePage() {
+	return "index";
+}
+
+@GetMapping("/send_text_email")
+public String sendPlainTextEmail(Model model) {
+	String from = "admin@gdfnow.org";
+	String to = "satinder_2000@outlook.com";
+	
+	SimpleMailMessage message = new SimpleMailMessage();
+	message.setFrom(from);
+	message.setTo(to);
+	message.setSubject("This is a plain text email");
+	message.setText("Hello guys! This is a plain text email.");
+	
+	mailSender.send(message);
+	
+	model.addAttribute("message", "A plain text email has been sent");
+	return "result";
+}

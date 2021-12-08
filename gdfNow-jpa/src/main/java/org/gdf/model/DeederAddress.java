@@ -11,9 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "USER_ADDRESS")
-public class UserAddress implements Serializable {
+@Table(name = "DEEDER_ADDRESS")
+public class DeederAddress implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 

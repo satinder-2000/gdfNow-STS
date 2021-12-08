@@ -5,7 +5,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="#" th:action="@{/userregister/user}" th:object="${userForm}" method="post" enctype="multipart/form-data">
+<h2>Deeder Nomination</h2>
+<form action="#" th:action="@{/nominate/deeder}" th:object="${deederForm}" method="post" enctype="multipart/form-data">
 <table>
 <tr>
 <td>First Name:</td>
@@ -53,6 +54,12 @@ OR
 <td>Mobile:</td>
 <td><input type="text" th:field="*{mobile}" /> </td>
 <td th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}">Mobile Errors</td>
+</tr>
+
+<tr>
+<td>About:</td>
+<td><textarea th:field="*{about}" cols="20" rows="20"></textarea> </td>
+<td th:if="${#fields.hasErrors('about')}" th:errors="*{about}">Mobile Errors</td>
 </tr>
 
 <tr>

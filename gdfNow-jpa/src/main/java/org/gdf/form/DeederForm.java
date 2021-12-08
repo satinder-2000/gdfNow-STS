@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class UserForm {
+public class DeederForm {
 	
 	@NotNull
 	@Size(min=2, max=25)
@@ -22,6 +22,10 @@ public class UserForm {
 	private String phone;
 	@Pattern(regexp = "\\\\d{11}")
 	private String mobile;
+	
+	@NotNull
+	@Size(min=2, max=450)
+	private String about;
 	
 	private MultipartFile profileImage; 
 		
@@ -68,14 +72,20 @@ public class UserForm {
 		this.mobile = mobile;
 	}
 	
+	
+	
+	public String getAbout() {
+		return about;
+	}
+	public void setAbout(String about) {
+		this.about = about;
+	}
 	public MultipartFile getProfileImage() {
 		return profileImage;
 	}
 	public void setProfileImage(MultipartFile profileImage) {
 		this.profileImage = profileImage;
 	}
-	
-	
-	
+
 
 }

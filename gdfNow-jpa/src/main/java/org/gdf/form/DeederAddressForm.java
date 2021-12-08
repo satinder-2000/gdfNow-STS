@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class UserAddressForm {
+public class DeederAddressForm {
 	
 	@NotNull
 	@Size(min=2, max=45)
@@ -53,8 +53,5 @@ public class UserAddressForm {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	
-	
-	
 
 }
