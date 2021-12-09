@@ -1,29 +1,17 @@
-/**
- * 
- */
 package org.gdf.model;
-
-import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-/**
- * @author satindersingh
- *
- */
-@Entity(name="BUSINESS_ADDRESS")
-public class BusinessAddress implements Serializable {
+@Entity
+@Table(name="NGO_ADDRESS")
+public class NgoAddress {
 	
-	private static final long serialVersionUID = 6893399628918125552L;
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -44,9 +32,11 @@ public class BusinessAddress implements Serializable {
 	
 	private String phone2;
 	
-	@OneToOne(targetEntity = Country.class, cascade = CascadeType.DETACH)
+	@OneToOne(targetEntity = Country.class, cascade = CascadeType.ALL)
 	private Country country;
 	
+	
+
 	public int getId() {
 		return id;
 	}
@@ -126,19 +116,5 @@ public class BusinessAddress implements Serializable {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-
-	@Override
-    public String toString() {
-        return "{" + "\"id\":"+ id +","+
-        		 "\"line1\":\""+ line1 +"\","+
-        		 "\"line2\":\""+ line2 +"\","+
-        		 "\"line3\":\""+ line3 +"\","+
-        		 "\"postcode\":\""+ postcode +"\","+
-        		 "\"city\":\""+ city +"\","+
-        		 "\"state\":\""+ state +"\","+
-        		 "\"country\":\""+ country.getName()+"\"}";
-    }
-	
-	
 
 }

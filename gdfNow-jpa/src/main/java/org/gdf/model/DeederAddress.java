@@ -1,50 +1,78 @@
+/**
+ * 
+ */
 package org.gdf.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+
+/**
+ * @author satindersingh
+ *
+ */
 
 @Entity
-@Table(name = "DEEDER_ADDRESS")
+@Table(name = "DEEDER_ADDRESS", uniqueConstraints={@UniqueConstraint(columnNames = {"id"})})
 public class DeederAddress implements Serializable {
 	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 	
 	@Column(name = "ADDRESS_LINE")
 	private String addressLine;
 	
-	@Column(name = "POST_CODE")
+	@Column(name="POSTCODE")
 	private String postCode;
 	
-	@Column(name = "CITY")
+	
+	@Column(name="CITY")
 	private String city;
 	
-	@Column(name = "STATE")
+	@Column(name="STATE")
 	private String state;
 	
-	@OneToOne(targetEntity = Country.class, cascade = CascadeType.DETACH)
+	
+	
+	@OneToOne(targetEntity = Country.class, cascade = CascadeType.ALL)
 	private Country country;
+	
+	
+        
+    @Column(name = "CREATED_ON")
+    private LocalDateTime createdOn;
 
-	public int getId() {
+    @Column(name = "UPDATED_ON")
+    private LocalDateTime updatedOn;
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	
 
 	public String getAddressLine() {
 		return addressLine;
@@ -53,6 +81,8 @@ public class DeederAddress implements Serializable {
 	public void setAddressLine(String addressLine) {
 		this.addressLine = addressLine;
 	}
+
+	
 
 	public String getPostCode() {
 		return postCode;
@@ -77,7 +107,7 @@ public class DeederAddress implements Serializable {
 	public void setState(String state) {
 		this.state = state;
 	}
-
+	
 	public Country getCountry() {
 		return country;
 	}
@@ -85,7 +115,42 @@ public class DeederAddress implements Serializable {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
+
+	
+	public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public LocalDateTime getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(LocalDateTime updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+	@Override
+	public String toString() {
+		return "DeederAddress [id=" + id + ", addressLine=" + addressLine + ", postCode=" + postCode + ", city=" + city
+				+ ", state=" + state + ", country=" + country + "]";
+	}
+        
+        
+        
+	
+
+	
+
+	
+
+	
+	
 	
 	
 
+	
 }

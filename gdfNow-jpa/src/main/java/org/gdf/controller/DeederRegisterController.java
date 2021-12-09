@@ -122,6 +122,7 @@ public class DeederRegisterController {
 		}else {
 			//Deeder Address now
 	        DeederAddress address=new DeederAddress();
+	     
 	        address.setAddressLine(addressForm.getAddressLine());
 	        address.setPostCode(addressForm.getPostCode());
 	        address.setCity(addressForm.getCity());

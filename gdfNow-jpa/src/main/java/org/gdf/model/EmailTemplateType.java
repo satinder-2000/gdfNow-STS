@@ -1,8 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.gdf.model;
 
+/**
+ *
+ * @author root
+ */
 public enum EmailTemplateType {
-	
-	USER_REGISTER,
+    USER_REGISTER,
     ACCESS_CONFIRM,
     DEEDER_REGISTER,
     USER_DEEDER_REGISTER,
@@ -25,5 +33,6 @@ public enum EmailTemplateType {
     PASSWORD_RESET,
     NOMINATED_DEED,
     NOMINATED_DEED_USER_COPY
-
+    
+    
 }

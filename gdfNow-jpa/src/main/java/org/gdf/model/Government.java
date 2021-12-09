@@ -1,13 +1,8 @@
-/**
- *
- */
-package org.gdf.model;
+    package org.gdf.model;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,29 +16,26 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-/**
- * @author satindersingh
- *
- */
 @Entity
-@Table(name = "BUSINESS")
-public class Business implements Serializable {
-
-    private static final long serialVersionUID = -5201243723433582970L;
+@Table(name = "GOVERNMENT")
+public class Government {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
+    @Column(name = "OFFICE_NAME")
+    private String officeName;
 
     private String email;
 
+    @Column(name = "OFFICE_FUNCTION")
+    private String officeFunction;
+
     private String website;
 
-    private String description;
-    
-    private boolean confirmed;
+    @Column(name = "CONTACT_NAME")
+    private String contactName;
     
     @Column(name = "CREATED_ON")
     private LocalDateTime createdOn;
@@ -51,21 +43,21 @@ public class Business implements Serializable {
     @Column(name = "UPDATED_ON")
     private LocalDateTime updatedOn;
 
+    @OneToOne(targetEntity = GovernmentAddress.class, cascade = CascadeType.ALL)
+    private GovernmentAddress governmentAddress;
+
     @OneToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(
-            name = "BUSINESS_CATEGORY_ID", nullable = false, updatable = true)
-    private BusinessCategory businessCategory;
-
-    @OneToOne(targetEntity = BusinessAddress.class, cascade = CascadeType.ALL)
-    private BusinessAddress businessAddress;
+            name = "GOVT_ORGS_ID", nullable = false, updatable = true)
+    GovernmentOrg governmentOrg;
 
     @OneToMany(
-            mappedBy = "business",
+            mappedBy = "government",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    List<BusinessOffer> businessOffers = new ArrayList<BusinessOffer>();
+    List<GovernmentOffer> governmentOffers = new ArrayList<>();
     
     @Column(name = "PROFILE_FILE")
     private String profileFile;
@@ -73,9 +65,9 @@ public class Business implements Serializable {
     @Transient
     private String logoURL;
     
+    private boolean confirmed;
+    
     private byte[] image;
-    
-    
 
     public int getId() {
         return id;
@@ -85,12 +77,12 @@ public class Business implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getOfficeName() {
+        return officeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOfficeName(String officeName) {
+        this.officeName = officeName;
     }
 
     public String getEmail() {
@@ -101,6 +93,14 @@ public class Business implements Serializable {
         this.email = email;
     }
 
+    public String getOfficeFunction() {
+        return officeFunction;
+    }
+
+    public void setOfficeFunction(String officeFunction) {
+        this.officeFunction = officeFunction;
+    }
+
     public String getWebsite() {
         return website;
     }
@@ -109,46 +109,12 @@ public class Business implements Serializable {
         this.website = website;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContactName() {
+        return contactName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isConfirmed() {
-        return confirmed;
-    }
-
-    public void setConfirmed(boolean confirmed) {
-        this.confirmed = confirmed;
-    }
-    
-    
-
-    public BusinessCategory getBusinessCategory() {
-        return businessCategory;
-    }
-
-    public void setBusinessCategory(BusinessCategory businessCategory) {
-        this.businessCategory = businessCategory;
-    }
-
-    public BusinessAddress getBusinessAddress() {
-        return businessAddress;
-    }
-
-    public void setBusinessAddress(BusinessAddress businessAddress) {
-        this.businessAddress = businessAddress;
-    }
-
-    public List<BusinessOffer> getBusinessOffers() {
-        return businessOffers;
-    }
-
-    public void setBusinessOffers(List<BusinessOffer> businessOffers) {
-        this.businessOffers = businessOffers;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
     public LocalDateTime getCreatedOn() {
@@ -185,6 +151,38 @@ public class Business implements Serializable {
         this.logoURL = logoURL;
     }
 
+    public GovernmentAddress getGovernmentAddress() {
+        return governmentAddress;
+    }
+
+    public void setGovernmentAddress(GovernmentAddress governmentAddress) {
+        this.governmentAddress = governmentAddress;
+    }
+
+    public GovernmentOrg getGovernmentOrg() {
+        return governmentOrg;
+    }
+
+    public void setGovernmentOrg(GovernmentOrg governmentOrg) {
+        this.governmentOrg = governmentOrg;
+    }
+
+    public List<GovernmentOffer> getGovernmentOffers() {
+        return governmentOffers;
+    }
+
+    public void setGovernmentOffers(List<GovernmentOffer> governmentOffers) {
+        this.governmentOffers = governmentOffers;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
     public byte[] getImage() {
         return image;
     }
@@ -195,11 +193,6 @@ public class Business implements Serializable {
     
     
     
-    @Override
-    public String toString() {
-        return "Business{" + "id=" + id + ", name=" + name + ", email=" + email + ", website=" + website + '}';
-    }
-    
     
 
-}
+ }
