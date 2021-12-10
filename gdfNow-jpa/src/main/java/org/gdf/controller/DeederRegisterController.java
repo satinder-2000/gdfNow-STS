@@ -13,10 +13,10 @@ import org.gdf.EmailService;
 import org.gdf.exception.RegistrationException;
 import org.gdf.form.DeederAddressForm;
 import org.gdf.model.Access;
-import org.gdf.model.AccessType;
 import org.gdf.model.Country;
 import org.gdf.model.Deeder;
 import org.gdf.model.DeederAddress;
+import org.gdf.model.EntityType;
 import org.gdf.model.OnHold;
 import org.gdf.repository.AccessRepository;
 import org.gdf.repository.CountryRepository;
@@ -130,6 +130,8 @@ public class DeederRegisterController {
 	        String countryCode=addressForm.getCountryCode();
 	        Country country=countryRepository.findByCode(countryCode);
 	        address.setCountry(country);
+	        address.setCreatedOn(LocalDateTime.now());
+	        address.setUpdatedOn(LocalDateTime.now());
 	        HttpSession session=request.getSession();
 	        Deeder deeder=(Deeder)session.getAttribute("deeder.register.deeder");
 	        deeder.setDeederAddress(address);
@@ -137,13 +139,9 @@ public class DeederRegisterController {
 	        logger.info("Deeder created with ID: "+deeder.getId());
 	        //Create OnHold record as well
 	        OnHold onHold=new OnHold();
-	        onHold.setAccessType(AccessType.DEEDER);
-	        onHold.setCountryCode(deeder.getDeederAddress().getCountry().getCode());
+	        onHold.setEntityType(EntityType.DEEDER);
 	        onHold.setEmail(deeder.getEmail());
 	        onHold.setEntityId(deeder.getId());
-	        onHold.setImage(deeder.getImage());
-	        onHold.setName(deeder.getFirstName()+" "+deeder.getLastName());
-	        onHold.setProfileFile(deeder.getProfileFile());
 	        onHold=onHoldRepository.save(onHold);
 	        logger.info("OnHold created for deeder: "+onHold.getEmail());
 	        session.setAttribute("deeder.register.deeder",deeder);

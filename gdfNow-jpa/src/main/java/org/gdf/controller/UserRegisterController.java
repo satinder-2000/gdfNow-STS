@@ -5,18 +5,16 @@ import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.gdf.EmailService;
 import org.gdf.exception.RegistrationException;
 import org.gdf.form.UserAddressForm;
 import org.gdf.form.UserForm;
 import org.gdf.model.Access;
-import org.gdf.model.AccessType;
 import org.gdf.model.Country;
+import org.gdf.model.EntityType;
 import org.gdf.model.OnHold;
 import org.gdf.model.User;
 import org.gdf.model.UserAddress;
@@ -123,6 +121,8 @@ public class UserRegisterController {
 	        address.setPostCode(addressForm.getPostCode());
 	        address.setCity(addressForm.getCity());
 	        address.setState(addressForm.getState());
+	        address.setCreatedOn(LocalDateTime.now());
+	        address.setUpdatedOn(LocalDateTime.now());
 	        String countryCode=addressForm.getCountryCode();
 	        Country country=countryRepository.findByCode(countryCode);
 	        address.setCountry(country);
@@ -134,13 +134,9 @@ public class UserRegisterController {
 	        
 	        //Create OnHold record as well
 	        OnHold onHold=new OnHold();
-	        onHold.setAccessType(AccessType.USER);
-	        onHold.setCountryCode(user.getUserAddress().getCountry().getCode());
+	        onHold.setEntityType(EntityType.USER);
 	        onHold.setEmail(user.getEmail());
 	        onHold.setEntityId(user.getId());
-	        onHold.setImage(user.getImage());
-	        onHold.setName(user.getFirstName()+" "+user.getLastName());
-	        onHold.setProfileFile(user.getProfileFile());
 	        onHold=onHoldRepository.save(onHold);
 	        logger.info("OnHold created for user: "+onHold.getEmail());
 	        session.setAttribute("user.register.user",user);

@@ -37,25 +37,34 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
 
+    @Column(name = "FIRSTNAME")
     private String firstName;
 
+    @Column(name = "LASTNAME")
     private String lastName;
     
+    @Column(name = "GENDER")
     private String gender;
 
+    @Column(name = "DOB")
     private LocalDate dob;
     
     @Transient
     private String dobStr;
 
+    @Column(name = "EMAIL")
     private String email;
 
+    @Column(name = "PHONE")
     private String phone;
 
+    @Column(name = "MOBILE")
     private String mobile;
     
+    @Column(name = "IMAGE")
     private byte[] image;
 
     @OneToOne(targetEntity = UserAddress.class, cascade = CascadeType.ALL)

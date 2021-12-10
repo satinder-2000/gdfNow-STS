@@ -5,8 +5,9 @@
  */
 package org.gdf.model.comment;
 
-import org.gdf.model.AccessType;
 import org.gdf.model.Deed;
+import org.gdf.model.EntityType;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +19,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 import javax.persistence.Transient;
 
 /**
@@ -29,7 +29,9 @@ import javax.persistence.Transient;
 @Table(name = "DEED_COMMENT")
 public class DeedComment implements Serializable {
 
-    @Id
+    private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
@@ -37,8 +39,8 @@ public class DeedComment implements Serializable {
     
     private LocalDateTime date;
     
-    @Column(name = "ACCESS_TYPE")
-    private AccessType accessType;
+    @Column(name = "ENTITY_TYPE")
+    private EntityType entityType;
     
     @Column(name = "ACCESS_ID")
     private int accessId;
@@ -78,16 +80,17 @@ public class DeedComment implements Serializable {
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
+        
 
-    public AccessType getAccessType() {
-        return accessType;
-    }
+    public EntityType getEntityType() {
+		return entityType;
+	}
 
-    public void setAccessType(AccessType accessType) {
-        this.accessType = accessType;
-    }
+	public void setEntityType(EntityType entityType) {
+		this.entityType = entityType;
+	}
 
-    public int getAccessId() {
+	public int getAccessId() {
         return accessId;
     }
 

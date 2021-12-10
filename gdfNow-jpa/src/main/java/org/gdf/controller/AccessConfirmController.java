@@ -2,8 +2,6 @@ package org.gdf.controller;
 
 import java.time.LocalDateTime;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.gdf.EmailService;
 import org.gdf.form.AccessConfirmForm;
 import org.gdf.model.Access;
@@ -39,7 +37,6 @@ public class AccessConfirmController {
 	
 	@GetMapping("")
 	String initAccessConfirm(@RequestParam(name = "id") String email, AccessConfirmForm  accessConfirmForm, HttpServletRequest request) {
-		OnHold onHold=onHoldRepository.findByEmail(email);
 		accessConfirmForm.setEmail(email);
 		return "/accessConfirm";
 	}
@@ -53,7 +50,7 @@ public class AccessConfirmController {
 			Access access=new Access();
 			access.setEmail(onHold.getEmail());
 			access.setPassword(PasswordUtil.generateSecurePassword(accessConfirmForm.getPassword(), accessConfirmForm.getEmail()));
-			access.setAccessType(onHold.getAccessType());
+			access.setEntityType(onHold.getEntityType());
 			access.setCreatedOn(LocalDateTime.now());
 			access.setFailedAttempts(0);
 			access=accessRepository.save(access);

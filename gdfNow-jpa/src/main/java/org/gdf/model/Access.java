@@ -10,9 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "ACCESS")
@@ -32,8 +30,8 @@ public class Access implements Serializable {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ACCESS_TYPE")
-    private AccessType accessType;
+    @Column(name = "ENTITY_TYPE")
+    private EntityType entityType;
 
     @Column(name = "FAILED_ATTEMPTS")
     private int failedAttempts;
@@ -68,15 +66,17 @@ public class Access implements Serializable {
         this.password = password;
     }
 
-    public AccessType getAccessType() {
-        return accessType;
-    }
+    
 
-    public void setAccessType(AccessType accessType) {
-        this.accessType = accessType;
-    }
+    public EntityType getEntityType() {
+		return entityType;
+	}
 
-    public int getFailedAttempts() {
+	public void setEntityType(EntityType entityType) {
+		this.entityType = entityType;
+	}
+
+	public int getFailedAttempts() {
 		return failedAttempts;
 	}
 

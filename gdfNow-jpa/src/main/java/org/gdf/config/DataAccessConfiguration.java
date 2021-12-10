@@ -1,19 +1,10 @@
 package org.gdf.config;
 
-import javax.sql.DataSource;
-
-import org.apache.commons.dbcp2.BasicDataSource;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.session.jdbc.config.annotation.SpringSessionDataSource;
-import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
-
 //@EnableJdbcHttpSession
 //@Configuration
 public class DataAccessConfiguration {
 	
-	@Value("${spring.datasource.driver-class-name}")
+	/*@Value("${spring.datasource.driver-class-name}")
 	private String dbJdbcDriver;
 	
 	@Value("${db.session.conn.string}")
@@ -44,6 +35,6 @@ public class DataAccessConfiguration {
 	    dataSource.setValidationQuery(dbSesnAccessValityQuery);
 	      
 	    return dataSource;
-	}
+	}*/
 	
 }

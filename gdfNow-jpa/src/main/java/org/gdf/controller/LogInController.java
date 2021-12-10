@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.gdf.exception.LoginException;
 import org.gdf.form.LoginForm;
 import org.gdf.model.Access;
-import org.gdf.model.AccessType;
+import org.gdf.model.EntityType;
 import org.gdf.model.User;
 import org.gdf.repository.AccessRepository;
 import org.gdf.repository.UserRepository;
@@ -58,7 +58,7 @@ public class LogInController {
             }else if (passwordVerified && attempts>0){
                 access.setFailedAttempts(0);
                 access=accessRepository.save(access);
-                AccessType acType=access.getAccessType();
+                EntityType acType=access.getEntityType();
                 HttpSession session=request.getSession();
                 switch (acType) {
 				case USER: {

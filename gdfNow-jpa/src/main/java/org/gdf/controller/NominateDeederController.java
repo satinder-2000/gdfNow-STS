@@ -13,10 +13,10 @@ import javax.servlet.http.HttpSession;
 import org.gdf.exception.RegistrationException;
 import org.gdf.form.DeederAddressForm;
 import org.gdf.form.DeederForm;
-import org.gdf.model.AccessType;
 import org.gdf.model.Country;
 import org.gdf.model.Deeder;
 import org.gdf.model.DeederAddress;
+import org.gdf.model.EntityType;
 import org.gdf.model.OnHold;
 import org.gdf.model.User;
 import org.gdf.repository.CountryRepository;
@@ -140,13 +140,9 @@ private static Logger logger=LoggerFactory.getLogger(DeederRegisterController.cl
 	        session.setAttribute("deeder.register.deeder",deeder);
 	        //Create OnHold record as well
 	        OnHold onHold=new OnHold();
-	        onHold.setAccessType(AccessType.DEEDER);
-	        onHold.setCountryCode(deeder.getDeederAddress().getCountry().getCode());
+	        onHold.setEntityType(EntityType.DEEDER);
 	        onHold.setEmail(deeder.getEmail());
 	        onHold.setEntityId(deeder.getId());
-	        onHold.setImage(deeder.getImage());
-	        onHold.setName(deeder.getFirstName()+" "+deeder.getLastName());
-	        onHold.setProfileFile(deeder.getProfileFile());
 	        onHold=onHoldRepository.save(onHold);
 	        logger.info("OnHold created for nominated deeder: "+onHold.getEmail());
 	        session.removeAttribute("deeder.register.deeder");

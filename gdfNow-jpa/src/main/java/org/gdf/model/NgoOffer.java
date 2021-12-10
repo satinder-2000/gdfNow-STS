@@ -4,10 +4,8 @@ import org.gdf.model.comment.NgoOfferComment;
 import org.gdf.model.like.NgoOfferLike;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 
@@ -27,7 +25,9 @@ import javax.persistence.Transient;
 @Table(name = "NGO_OFFER")
 public class NgoOffer implements Serializable {
 
-    @Id
+    private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

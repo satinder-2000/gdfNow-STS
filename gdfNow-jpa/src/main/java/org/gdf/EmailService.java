@@ -18,7 +18,6 @@ import org.gdf.repository.EmailMessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -110,7 +109,7 @@ public class EmailService {
 	
 	public void sendAccessConfirmEmail(String email) {
         List<EmailMessage> accessMessages=emailMessageRepository.findByTemplate(EmailTemplateType.ACCESS_CONFIRM.name());
-        Map<String, String> map=new HashMap();
+        Map<String, String> map=new HashMap<String, String>();
         for (EmailMessage msg:accessMessages){
             map.put(msg.getMessageTitle(), msg.getText());
         }

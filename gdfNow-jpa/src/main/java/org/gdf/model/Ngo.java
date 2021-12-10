@@ -1,6 +1,5 @@
 package org.gdf.model;
 
-import org.gdf.model.like.DeederLike;
 import org.gdf.model.like.NgoLike;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -28,7 +27,9 @@ import javax.persistence.Transient;
 @Table(name = "NGO")
 public class Ngo implements Serializable {
 
-    @Id
+    private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

@@ -40,32 +40,43 @@ public class Deeder implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
 
+    @Column(name = "FIRSTNAME")
     private String firstName;
     
-
+    @Column(name = "LASTNAME")
     private String lastName;
 
+    @Column(name = "GENDER")
     private String gender;
 
+    @Column(name = "DOB")
     private LocalDate dob;
     
     @Transient
     private String dobStr;
     
+    @Column(name = "EMAIL")
     private String email;
 
+    @Column(name = "PHONE")
     private String phone;
 
+    @Column(name = "MOBILE")
     private String mobile;
 
+    @Column(name = "ABOUT")
     private String about;
     
+    @Column(name = "CONFIRMED")
     private boolean confirmed;
     
+    @Column(name = "NOMINATED")
     private boolean nominated;
     
+    @Column(name = "IMAGE")
     private byte[] image;
     
     @Column(name = "PROFILE_FILE")

@@ -5,25 +5,20 @@
  */
 package org.gdf.model.comment;
 
-import org.gdf.model.AccessType;
+import org.gdf.model.EntityType;
 import org.gdf.model.GovernmentOffer;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -45,8 +40,8 @@ public class GovernmentOfferComment implements Serializable {
     private LocalDateTime date;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "ACCESS_TYPE")
-    private AccessType accessType;
+    @Column(name = "ENTITY_TYPE")
+    private EntityType entityType;
     
     @Column(name = "POSTED_BY")
     private String PostedBy;
@@ -84,17 +79,17 @@ public class GovernmentOfferComment implements Serializable {
         this.date = date;
     }
 
-    public AccessType getAccessType() {
-        return accessType;
-    }
-
-    public void setAccessType(AccessType accessType) {
-        this.accessType = accessType;
-    }
-
     
 
-    public String getPostedBy() {
+    public EntityType getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(EntityType entityType) {
+		this.entityType = entityType;
+	}
+
+	public String getPostedBy() {
         return PostedBy;
     }
 

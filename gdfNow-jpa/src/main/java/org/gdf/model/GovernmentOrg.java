@@ -13,7 +13,9 @@ import javax.persistence.Transient;
 @Table(name="GOVERNMENT_ORGS")
 public class GovernmentOrg implements Serializable {
 	
-    @Id
+    private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     

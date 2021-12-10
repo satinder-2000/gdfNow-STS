@@ -18,10 +18,12 @@ import javax.persistence.Table;
  * @author root
  */
 @Entity
-@Table(name = "EMAIL_MESSAGES")
+@Table(name = "EMAIL_MESSAGE")
 public class EmailMessage implements Serializable {
     
-    @Id
+    private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID")
     private int id;

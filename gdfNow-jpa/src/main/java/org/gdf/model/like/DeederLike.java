@@ -19,7 +19,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.gdf.model.Deed;
 import org.gdf.model.Deeder;
 import org.gdf.model.EntityType;
 
