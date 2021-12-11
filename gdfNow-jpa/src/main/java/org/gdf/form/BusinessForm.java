@@ -21,6 +21,8 @@ public class BusinessForm {
 	private String description;
 	@Pattern(regexp = "^((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*$")
 	private String website;
+	private String businessCategory;
+	private String businessSubCategory;
 	
 	private List<String> catType=new ArrayList<String>();
 	
@@ -86,6 +88,23 @@ public class BusinessForm {
 	public void setProfileImage(MultipartFile profileImage) {
 		this.profileImage = profileImage;
 	}
+
+	public String getBusinessCategory() {
+		return businessCategory;
+	}
+
+	public void setBusinessCategory(String businessCategory) {
+		this.businessCategory = businessCategory;
+	}
+
+	public String getBusinessSubCategory() {
+		return businessSubCategory;
+	}
+
+	public void setBusinessSubCategory(String businessSubCategory) {
+		this.businessSubCategory = businessSubCategory;
+	}
+	
 	
 	
 

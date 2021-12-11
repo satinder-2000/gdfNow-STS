@@ -10,6 +10,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.gdf.model.Business;
 import org.gdf.model.Deeder;
 import org.gdf.model.EmailMessage;
 import org.gdf.model.EmailTemplateType;
@@ -129,6 +130,34 @@ public class EmailService {
             mex.printStackTrace();
         }
     }
+	
+	public void sendBusinessRegConfirmEmail(Business business) {
+		List<EmailMessage> accessMessages=emailMessageRepository.findByTemplate(EmailTemplateType.BUSINESS_REGISTER.name());
+		StringBuilder sb=new StringBuilder(business.getEmail()+"\n");
+		Map<String, String> map=new HashMap<String, String>();
+        for (EmailMessage msg:accessMessages){
+            map.put(msg.getMessageTitle(), msg.getText());
+        }
+        
+        sb.append(map.get("registrationBusiness")).append("\n");
+        sb.append(map.get("successfullyReg")).append("\n");
+        sb.append(map.get("setPassword")).append("\n");
+        sb.append(protocol).append(webURI).append(accessConfirmURI).append(business.getEmail());
+        MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message);
+		try {
+			helper.setSubject(map.get("registrationBusiness"));
+			helper.setFrom(sender);
+			helper.setTo(business.getEmail());
+			boolean html = false;
+    		helper.setText(sb.toString(), html);
+    		mailSender.send(message);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 

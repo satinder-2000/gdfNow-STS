@@ -60,7 +60,6 @@ public class UserRegisterController {
 	}
 	
 	
-	//@PostMapping("/register")
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public RedirectView addNewUser(HttpServletRequest request, UserForm userForm, BindingResult bindingResult){
 
@@ -106,7 +105,7 @@ public class UserRegisterController {
 	}
 
 	@GetMapping("/userAddress")
-	String initNewUser(UserAddressForm userAddressForm) {
+	String initUserAddress(UserAddressForm userAddressForm) {
 		return "/userregister/userAddress";
 	}
 	
