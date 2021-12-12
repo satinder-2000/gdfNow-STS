@@ -16,11 +16,7 @@ public class NgoAddress {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	private String line1;
-	
-	private String line2;
-	
-	private String line3;
+	private String addressLine;
 	
 	private String city;
 	
@@ -28,9 +24,7 @@ public class NgoAddress {
 	
 	private String state;
 	
-	private String phone1;
-	
-	private String phone2;
+	private String phone;
 	
 	@OneToOne(targetEntity = Country.class, cascade = CascadeType.ALL)
 	private Country country;
@@ -45,28 +39,22 @@ public class NgoAddress {
 		this.id = id;
 	}
 
-	public String getLine1() {
-		return line1;
+	
+
+	public String getAddressLine() {
+		return addressLine;
 	}
 
-	public void setLine1(String line1) {
-		this.line1 = line1;
+	public void setAddressLine(String addressLine) {
+		this.addressLine = addressLine;
 	}
 
-	public String getLine2() {
-		return line2;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setLine2(String line2) {
-		this.line2 = line2;
-	}
-
-	public String getLine3() {
-		return line3;
-	}
-
-	public void setLine3(String line3) {
-		this.line3 = line3;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getCity() {
@@ -91,22 +79,6 @@ public class NgoAddress {
 
 	public void setState(String state) {
 		this.state = state;
-	}
-
-	public String getPhone1() {
-		return phone1;
-	}
-
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
-	}
-
-	public String getPhone2() {
-		return phone2;
-	}
-
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
 	}
 
 	public Country getCountry() {

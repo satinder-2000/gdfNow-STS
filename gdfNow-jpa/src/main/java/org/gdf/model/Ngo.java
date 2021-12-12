@@ -21,7 +21,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 @Entity
 @Table(name = "NGO")
@@ -82,12 +82,9 @@ public class Ngo implements Serializable {
     )
     private List<NgoOffer> ngoOffers=new ArrayList<>();
     
-    @Column(name = "LOGO_FILE")
-    private String logoFile;
+    @Column(name = "PROFILE_FILE")
+    private String profileFile;
     
-    @Transient
-    private String logoURL;
-
     public int getId() {
         return id;
     }
@@ -178,23 +175,17 @@ public class Ngo implements Serializable {
         this.description = description;
     }
 
-    public String getLogoFile() {
-        return logoFile;
-    }
+    
 
-    public void setLogoFile(String logoFile) {
-        this.logoFile = logoFile;
-    }
+    public String getProfileFile() {
+		return profileFile;
+	}
 
-    public String getLogoURL() {
-        return logoURL;
-    }
+	public void setProfileFile(String profileFile) {
+		this.profileFile = profileFile;
+	}
 
-    public void setLogoURL(String logoURL) {
-        this.logoURL = logoURL;
-    }
-
-    public boolean isConfirmed() {
+	public boolean isConfirmed() {
         return confirmed;
     }
 

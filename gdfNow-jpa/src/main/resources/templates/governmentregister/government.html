@@ -4,10 +4,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").hide();
+  });
+});
+</script>
 <script type="text/javascript">
 $(document).ready(
 	function() {
-		$.getJSON('/businessregister/categories', {
+		$.getJSON('/governmentregister/ministries', {
 			ajax : 'true'
 		}, function(data) {
 			var html = '<option value="">Choose One</option>';
@@ -17,16 +24,16 @@ $(document).ready(
 						+ data[i] + '</option>';
 			}
 			html += '</option>';
-                        //now that we have our options, give them to our select
-			$('#category').html(html);
+            //now that we have our options, give them to our select
+			$('#ministry').html(html);
 		});
 	});
 
 $(document).ready(function() { 
-	$('#category').change(
+	$('#ministry').change(
 		function() {
-			$.getJSON('/businessregister/subcategories', {
-				category : $(this).val(),
+			$.getJSON('/governmentregister/departments', {
+				ministry : $(this).val(),
 				ajax : 'true'
 			}, function(data) {
 				var html = '<option value="">Choose One</option>';
@@ -37,7 +44,7 @@ $(document).ready(function() {
 				}
 				html += '</option>';
  
-				$('#subcategory').html(html);
+				$('#department').html(html);
 			});
 		});
 });
@@ -45,13 +52,13 @@ $(document).ready(function() {
 
 </head>
 <body>
-<h2>Business Details</h2>
-<form action="#" th:action="@{/businessregister/business}" th:object="${businessForm}" method="post" enctype="multipart/form-data">
+<h2>Government Department /Agency Details</h2>
+<form action="#" th:action="@{/governmentregister/government}" th:object="${governmentForm}" method="post" enctype="multipart/form-data">
 <table>
 <tr>
-<td>Business Name:</td>
+<td>Office Name:</td>
 <td><input type="text" th:field="*{name}" /></td>
-<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Business Name Error</td>
+<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Office Name Error</td>
 </tr>
 
 <tr>
@@ -61,31 +68,31 @@ $(document).ready(function() {
 </tr>
 
 <tr>
-<td>Business Description:</td>
+<td>Office Function / Description:</td>
 <td><textarea cols="20" rows="25" th:field="*{description}"></textarea></td>
 <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</td>
 </tr>
 
 <tr>
-<td>Business Web Site:</td>
+<td>Web Site:</td>
 <td><input type="text" th:field="*{website}" /></td>
 <td th:if="${#fields.hasErrors('website')}" th:errors="*{website}">Web Site Error</td>
 </tr>
 
 <tr>
-<td>Business Category:</td>
-<td><select id="category"  th:field="*{businessCategory}"  >
+<td>Ministry:</td>
+<td><select id="ministry"  th:field="*{ministry}"  >
 </select>
 </td>
-<td th:if="${#fields.hasErrors('businessCategory')}" th:errors="*{businessCategory}">Category Error</td>
+<td th:if="${#fields.hasErrors('ministry')}" th:errors="*{ministry}">Ministry Error</td>
 </tr>
 
 <tr>
-<td>Business Sub Category:</td>
-<td><select id="subcategory"   th:field="*{businessSubCategory}">
+<td>Department / Agency:</td>
+<td><select id="department"   th:field="*{department}">
 </select>
 </td>
-<td th:if="${#fields.hasErrors('businessSubCategory')}" th:errors="*{businessSubCategory}">Sub Category Error</td>
+<td th:if="${#fields.hasErrors('department')}" th:errors="*{department}">Department Error</td>
 </tr>
 
 <tr>
@@ -103,5 +110,7 @@ $(document).ready(function() {
 
 </table>
 </form>
+
+
 </body>
 </html>

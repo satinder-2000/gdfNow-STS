@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.gdf.model.EntityType;
 
 @Controller
 @RequestMapping(path="/accessconfirm")
@@ -58,7 +59,22 @@ public class AccessConfirmController {
 			onHoldRepository.delete(onHold);
 			//Finally, send email
 			emailService.sendAccessConfirmEmail(access.getEmail());
-			return "/home";
+			String toReturn="/home";
+			switch(access.getEntityType()) {
+			case USER: toReturn="/home/user";
+			break;
+			case DEEDER: toReturn="/home/deeder";
+			break;
+			case BUSINESS: toReturn="/home/bisiness";
+			break;
+			case GOVERNMENT: toReturn="/home/government";
+			break;
+			case NGO: toReturn="/home/ngo";
+			break;
+			default: toReturn="/home";
+			
+			}
+			return toReturn;
 		}
 	}
 }

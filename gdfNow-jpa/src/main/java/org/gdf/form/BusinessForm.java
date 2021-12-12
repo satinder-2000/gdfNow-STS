@@ -2,8 +2,7 @@ package org.gdf.form;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -11,16 +10,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BusinessForm {
 	
-	@NotNull
+	@NotBlank
 	@Size(min=2, max=45)
 	private String name;
+	
+	@NotBlank
 	@Pattern(regexp = "^(.+)@(.+)$")
 	private String email;
-	@NotNull
+	
+	@NotBlank
 	@Size(min=2, max=450)
 	private String description;
+	
+	@NotBlank
 	@Pattern(regexp = "^((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*$")
 	private String website;
+	
 	private String businessCategory;
 	private String businessSubCategory;
 	

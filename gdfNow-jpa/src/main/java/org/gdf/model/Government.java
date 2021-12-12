@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 @Entity
 @Table(name = "GOVERNMENT")
@@ -22,16 +22,19 @@ public class Government {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
     private int id;
 
-    @Column(name = "OFFICE_NAME")
-    private String officeName;
+    @Column(name = "NAME")
+    private String name;
 
+    @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "OFFICE_FUNCTION")
-    private String officeFunction;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
+    @Column(name = "WEBSITE")
     private String website;
 
     @Column(name = "CONTACT_NAME")
@@ -62,11 +65,10 @@ public class Government {
     @Column(name = "PROFILE_FILE")
     private String profileFile;
     
-    @Transient
-    private String logoURL;
-    
+    @Column(name = "CONFIRMED")
     private boolean confirmed;
     
+    @Column(name = "IMAGE")
     private byte[] image;
 
     public int getId() {
@@ -77,28 +79,30 @@ public class Government {
         this.id = id;
     }
 
-    public String getOfficeName() {
-        return officeName;
-    }
+    
 
-    public void setOfficeName(String officeName) {
-        this.officeName = officeName;
-    }
+    public String getName() {
+		return name;
+	}
 
-    public String getEmail() {
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getOfficeFunction() {
-        return officeFunction;
-    }
-
-    public void setOfficeFunction(String officeFunction) {
-        this.officeFunction = officeFunction;
     }
 
     public String getWebsite() {
@@ -143,15 +147,7 @@ public class Government {
 		this.profileFile = profileFile;
 	}
 
-	public String getLogoURL() {
-        return logoURL;
-    }
-
-    public void setLogoURL(String logoURL) {
-        this.logoURL = logoURL;
-    }
-
-    public GovernmentAddress getGovernmentAddress() {
+	public GovernmentAddress getGovernmentAddress() {
         return governmentAddress;
     }
 

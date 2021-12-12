@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 @Entity
 @Table(name="GOVERNMENT_ORGS")
@@ -17,23 +17,18 @@ public class GovernmentOrg implements Serializable {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name="ID")
+	private int id;
     
-    @Column(name = "COUNTRY_CODE")
-    private String countryCode;
+	@Column(name="MINISTRY")
+	private String ministry;
 
-    private String ministry;
+	@Column(name="DEPARTMENT")
+	private String department;
 
-    private String department;
-
-    private boolean confirmed;
+	@Column(name="CONFIRMED")
+	private boolean confirmed;
     
-    @Transient
-    private String ministryTemp;
-
-    @Transient
-    private String departmentTemp;
-
     public int getId() {
         return id;
     }
@@ -41,16 +36,6 @@ public class GovernmentOrg implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-    
-    
 
     public String getMinistry() {
         return ministry;
@@ -76,21 +61,7 @@ public class GovernmentOrg implements Serializable {
         this.confirmed = confirmed;
     }
 
-    public String getMinistryTemp() {
-        return ministryTemp;
-    }
-
-    public void setMinistryTemp(String ministryTemp) {
-        this.ministryTemp = ministryTemp;
-    }
-
-    public String getDepartmentTemp() {
-        return departmentTemp;
-    }
-
-    public void setDepartmentTemp(String departmentTemp) {
-        this.departmentTemp = departmentTemp;
-    }
+    
     
     
 	

@@ -7,7 +7,7 @@
 <script type="text/javascript">
 $(document).ready(
 	function() {
-		$.getJSON('/businessregister/categories', {
+		$.getJSON('/ngoregister/types', {
 			ajax : 'true'
 		}, function(data) {
 			var html = '<option value="">Choose One</option>';
@@ -18,15 +18,15 @@ $(document).ready(
 			}
 			html += '</option>';
                         //now that we have our options, give them to our select
-			$('#category').html(html);
+			$('#type').html(html);
 		});
 	});
 
 $(document).ready(function() { 
-	$('#category').change(
+	$('#type').change(
 		function() {
-			$.getJSON('/businessregister/subcategories', {
-				category : $(this).val(),
+			$.getJSON('/ngoregister/subtypes', {
+				type : $(this).val(),
 				ajax : 'true'
 			}, function(data) {
 				var html = '<option value="">Choose One</option>';
@@ -37,21 +37,23 @@ $(document).ready(function() {
 				}
 				html += '</option>';
  
-				$('#subcategory').html(html);
+				$('#subtype').html(html);
 			});
 		});
 });
 </script>
 
+
 </head>
 <body>
-<h2>Business Details</h2>
-<form action="#" th:action="@{/businessregister/business}" th:object="${businessForm}" method="post" enctype="multipart/form-data">
+<h2>Ngo Registration</h2>
+<h3>Ngo Details</h3>
+<form action="#" th:action="@{/ngoregister/ngo}" th:object="${ngoForm}" method="post" enctype="multipart/form-data">
 <table>
 <tr>
-<td>Business Name:</td>
+<td>NGO Name:</td>
 <td><input type="text" th:field="*{name}" /></td>
-<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Business Name Error</td>
+<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
 </tr>
 
 <tr>
@@ -61,32 +63,33 @@ $(document).ready(function() {
 </tr>
 
 <tr>
-<td>Business Description:</td>
+<td>Website:</td>
+<td><input type="text" th:field="*{website}" /> </td>
+<td th:if="${#fields.hasErrors('website')}" th:errors="*{website}">Website Errors</td>
+</tr>
+
+<tr>
+<td>NGO Description:</td>
 <td><textarea cols="20" rows="25" th:field="*{description}"></textarea></td>
 <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</td>
 </tr>
 
 <tr>
-<td>Business Web Site:</td>
-<td><input type="text" th:field="*{website}" /></td>
-<td th:if="${#fields.hasErrors('website')}" th:errors="*{website}">Web Site Error</td>
+<td>NGO Category:</td>
+<td><select id="type"  th:field="*{type}"  >
+</select>
+</td>
+<td th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Type Error</td>
 </tr>
 
 <tr>
-<td>Business Category:</td>
-<td><select id="category"  th:field="*{businessCategory}"  >
+<td>NGO Sub Category:</td>
+<td><select id="subtype"   th:field="*{subtype}">
 </select>
 </td>
-<td th:if="${#fields.hasErrors('businessCategory')}" th:errors="*{businessCategory}">Category Error</td>
+<td th:if="${#fields.hasErrors('subtype')}" th:errors="*{subtype}">Sub Type Error</td>
 </tr>
 
-<tr>
-<td>Business Sub Category:</td>
-<td><select id="subcategory"   th:field="*{businessSubCategory}">
-</select>
-</td>
-<td th:if="${#fields.hasErrors('businessSubCategory')}" th:errors="*{businessSubCategory}">Sub Category Error</td>
-</tr>
 
 <tr>
 <td>Profile Image:</td>
@@ -94,14 +97,16 @@ $(document).ready(function() {
 <td th:if="${#fields.hasErrors('profileImage')}" th:errors="*{profileImage}">Profile Image Errors</td>
 </tr>
 
+
 <tr>
 <td>
 <button type="submit">Continue</button>
 </td>
 </tr>
 
-
 </table>
 </form>
+
+
 </body>
 </html>

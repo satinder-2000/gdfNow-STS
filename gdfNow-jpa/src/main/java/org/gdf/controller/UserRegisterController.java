@@ -138,7 +138,7 @@ public class UserRegisterController {
 	        onHold.setEntityId(user.getId());
 	        onHold=onHoldRepository.save(onHold);
 	        logger.info("OnHold created for user: "+onHold.getEmail());
-	        session.setAttribute("user.register.user",user);
+	        session.removeAttribute("user.register.user");
 	        //Before redirect let's send the email
 	        emailService.sendUserRegConfirmEmail(user);
 			return "/userregister/success";

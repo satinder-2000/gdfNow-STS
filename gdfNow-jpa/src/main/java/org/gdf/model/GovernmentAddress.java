@@ -1,6 +1,7 @@
 package org.gdf.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,25 +15,23 @@ public class GovernmentAddress {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID")
 	private int id;
 	
-	private String line1;
+	@Column(name="ADDRESS_LINE")
+	private String addressLine;
 	
-	private String line2;
-	
-	private String line3;
-	
+	@Column(name="CITY")
 	private String city;
 	
+	@Column(name="POSTCODE")
 	private String postcode;
 	
+	@Column(name="STATE")
 	private String state;
 	
-	private String phone1;
-	
-	private String phone2;
-	
-	
+	@Column(name="PHONE")
+	private String phone;
 	
 	@OneToOne(targetEntity = Country.class, cascade = CascadeType.ALL)
 	private Country country;
@@ -47,33 +46,13 @@ public class GovernmentAddress {
 	}
 
 
-	public String getLine1() {
-		return line1;
+	public String getAddressLine() {
+		return addressLine;
 	}
 
 
-	public void setLine1(String line1) {
-		this.line1 = line1;
-	}
-
-
-	public String getLine2() {
-		return line2;
-	}
-
-
-	public void setLine2(String line2) {
-		this.line2 = line2;
-	}
-
-
-	public String getLine3() {
-		return line3;
-	}
-
-
-	public void setLine3(String line3) {
-		this.line3 = line3;
+	public void setAddressLine(String addressLine) {
+		this.addressLine = addressLine;
 	}
 
 
@@ -107,23 +86,16 @@ public class GovernmentAddress {
 	}
 
 
-	public String getPhone1() {
-		return phone1;
+	
+
+
+	public String getPhone() {
+		return phone;
 	}
 
 
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
-	}
-
-
-	public String getPhone2() {
-		return phone2;
-	}
-
-
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 

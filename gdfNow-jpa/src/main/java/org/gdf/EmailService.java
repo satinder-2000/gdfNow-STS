@@ -14,6 +14,8 @@ import org.gdf.model.Business;
 import org.gdf.model.Deeder;
 import org.gdf.model.EmailMessage;
 import org.gdf.model.EmailTemplateType;
+import org.gdf.model.Government;
+import org.gdf.model.Ngo;
 import org.gdf.model.User;
 import org.gdf.repository.EmailMessageRepository;
 import org.slf4j.Logger;
@@ -146,9 +148,65 @@ public class EmailService {
         MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 		try {
-			helper.setSubject(map.get("registrationBusiness"));
+			helper.setSubject(map.get("subject"));
 			helper.setFrom(sender);
 			helper.setTo(business.getEmail());
+			boolean html = false;
+    		helper.setText(sb.toString(), html);
+    		mailSender.send(message);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void sendGovernmentRegConfirmEmail(Government government) {
+		List<EmailMessage> accessMessages=emailMessageRepository.findByTemplate(EmailTemplateType.GOVERNMENT_REGISTER.name());
+		StringBuilder sb=new StringBuilder(government.getEmail()+"\n");
+		Map<String, String> map=new HashMap<String, String>();
+        for (EmailMessage msg:accessMessages){
+            map.put(msg.getMessageTitle(), msg.getText());
+        }
+        
+        sb.append(map.get("registrationGovernment")).append("\n");
+        sb.append(map.get("successfullyReg")).append("\n");
+        sb.append(map.get("setPassword")).append("\n");
+        sb.append(protocol).append(webURI).append(accessConfirmURI).append(government.getEmail());
+        MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message);
+		try {
+			helper.setSubject(map.get("subject"));
+			helper.setFrom(sender);
+			helper.setTo(government.getEmail());
+			boolean html = false;
+    		helper.setText(sb.toString(), html);
+    		mailSender.send(message);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void sendNgoRegConfirmEmail(Ngo ngo) {
+		List<EmailMessage> accessMessages=emailMessageRepository.findByTemplate(EmailTemplateType.NGO_REGISTER.name());
+		StringBuilder sb=new StringBuilder(ngo.getEmail()+"\n");
+		Map<String, String> map=new HashMap<String, String>();
+        for (EmailMessage msg:accessMessages){
+            map.put(msg.getMessageTitle(), msg.getText());
+        }
+        
+        sb.append(map.get("registrationNgo")).append("\n");
+        sb.append(map.get("successfullyReg")).append("\n");
+        sb.append(map.get("setPassword")).append("\n");
+        sb.append(protocol).append(webURI).append(accessConfirmURI).append(ngo.getEmail());
+        MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message);
+		try {
+			helper.setSubject(map.get("subject"));
+			helper.setFrom(sender);
+			helper.setTo(ngo.getEmail());
 			boolean html = false;
     		helper.setText(sb.toString(), html);
     		mailSender.send(message);
