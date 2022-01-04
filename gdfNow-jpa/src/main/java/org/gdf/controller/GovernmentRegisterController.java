@@ -145,7 +145,7 @@ public class GovernmentRegisterController {
 	        session.removeAttribute("government.register.government");
 	        //Before redirect let's send the email
 	        emailService.sendGovernmentRegConfirmEmail(government);
-			return "/governmentrregister/success";
+			return "/governmentregister/success";
 			
 		}
 	}
